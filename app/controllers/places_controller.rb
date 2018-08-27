@@ -2,6 +2,7 @@ class PlacesController < ApplicationController
 
   def create
     @place = Place.new(place_params)
+    @place.ip = request.ip
     if @place.save
       redirect_to places_path, notice: "#{@place.name} Created!"
       render :create
@@ -46,7 +47,7 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :street, :city, :state, :country)
+    params.require(:place).permit(:name, :street, :city, :state, :country, :latitude, :longitude)
   end
 
 end

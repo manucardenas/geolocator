@@ -1,4 +1,14 @@
+<p>We will use your html location or ip unless you enter an address</p>
+
 <%= form_with(model: place) do |form| %>
+  <div>
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+  <div>
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
   <div>
     <%= form.label :name %>
     <%= form.text_field :name, required: true, class: "text_input" %>
