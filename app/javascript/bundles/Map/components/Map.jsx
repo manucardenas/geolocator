@@ -5,7 +5,7 @@ import axios from 'axios';
 export default class Map extends React.Component {
   componentDidMount() {
     mapboxgl.accessToken = 'pk.eyJ1IjoiYW5keXdlaXNzMTk4MiIsImEiOiJIeHpkYVBrIn0.3N03oecxx5TaQz7YLg2HqA'
-    let { coordinates } = this.props;
+    let { coordinates, centerOnUser } = this.props;
     const mapOptions = {
       container: this.mapContainer,
       style: `mapbox://styles/mapbox/streets-v9`,
@@ -17,7 +17,7 @@ export default class Map extends React.Component {
       maximumAge        : 30000,
       timeout           : 27000
     };
-    if ("geolocation" in navigator) {
+    if ("geolocation" in navigator && centerOnUser) {
       navigator.geolocation.getCurrentPosition(
         // success callback
         (position) => {
@@ -37,8 +37,11 @@ export default class Map extends React.Component {
         // options
         geolocationOptions
       );
+    }else{
+      this.createMap(mapOptions, geolocationOptions);
     }
-  }
+   }
+
 
   createMap = (mapOptions, geolocationOptions) => {
     this.map = new mapboxgl.Map(mapOptions);
@@ -88,9 +91,7 @@ export default class Map extends React.Component {
      .then((response) => { map.getSource('places').setData(response.data) })
      .catch((error) => { console.log(error) });
  }
-
-  }
-
+ 
   render() {
     const style = {
       width: '100%',
