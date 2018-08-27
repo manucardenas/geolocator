@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
-<p>
-  You are calling from
-  <span id="long"><%= @coordinates.first %></span>,
-  <span id="lat"><%= @coordinates.last %></span>
-</p>
+
+<h1>Places</h1>
 
 <%= react_component 'Map',
     props: { coordinates: @coordinates, centerOnUser: true} %>

@@ -29,10 +29,10 @@ export default class Map extends React.Component {
                           position.coords.longitude,
                           position.coords.latitude
                         ];
-          document.getElementById("long")
-                  .innerHTML = coordinates[0];
-          document.getElementById("lat")
-                  .innerHTML = coordinates[1];
+          document.getElementById("place_longitude")
+                  .value = coordinates[0];
+          document.getElementById("place_latitude")
+                  .value = coordinates[1];
           mapOptions.center = coordinates;
           this.createMap(mapOptions, geolocationOptions);
         },
